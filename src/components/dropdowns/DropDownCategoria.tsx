@@ -7,13 +7,12 @@ import {
      DropdownMenuSeparator, 
      DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu"
-import { Button } from "../ui/button";
 
 const DropDownCategoria: React.FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <Button variant="outline">Categorias</Button>
+                <p className="hover:text-blue-500 cursor-pointer">Categorias</p>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-72">
                 <DropdownMenuLabel>Categorias</DropdownMenuLabel>
