@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { InputWithButton } from "../inputs/InputWithButton";
 import { DropDownLogin } from "../dropdowns/DropDownLogin";
+import DropDownCategoria from "../dropdowns/DropDownCategoria";
 
 
 const Navbar: React.FC = () => {
@@ -18,17 +19,12 @@ const Navbar: React.FC = () => {
         <NavigationMenuList className="flex space-x-4">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link to="/UserProfile" className="hover:text-blue-500 transition hidden lg:block">Categorias</Link>
+              <DropDownCategoria />
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link to="/About" className="hover:text-blue-500 transition hidden lg:block">Vender</Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link to="/Help" className="hover:text-blue-500 transition hidden lg:block">Ayuda</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

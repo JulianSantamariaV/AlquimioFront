@@ -1,10 +1,10 @@
-import CardLogin from "@/components/cards/CardLogin";
+import CardRegister from "@/components/cards/CardRegister";
 
 
 const UserRegister: React.FC = () => {
   return (
     <div>
-      <CardLogin/>
+      <CardRegister/>
       </div>
   )
 }
