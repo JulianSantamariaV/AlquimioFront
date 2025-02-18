@@ -4,8 +4,9 @@ import MainLayout from "@/layouts/MainLayout";
 import Help from "@/pages/Help";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
+import ProductCreate from "@/pages/products/ProductCreate";
 import Register from "@/pages/Register";
-import UserProfile from "@/pages/UserProfile";
+import UserProfile from "@/pages/user/UserProfile";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -15,8 +16,9 @@ function AppRoutes() {
       {/* Rutas con Navbar */}
       <Route element={<MainLayout />}>
         <Route path='/' element={<Home />} />
-        <Route path="/UserProfile" element={<UserProfile />} />
+        <Route path="/user/UserProfile" element={<UserProfile />} />
         <Route path="/Help" element={<Help />} />
+        <Route path="/products/ProductCreate" element={<ProductCreate/>}/>        
       </Route>
 
       {/* Rutas sin Navbar */}

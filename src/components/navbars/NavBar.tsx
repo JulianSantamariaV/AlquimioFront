@@ -8,7 +8,7 @@ import DropDownCategoria from "../dropdowns/DropDownCategoria";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="flex items-center justify-between px-6 py-4 border-b">
+    <nav className="flex items-center justify-between px-6 py-4">
       {/* Logo */}
       <Link to="/" className="text-xl font-bold">
         Alquimio
@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
       {/* Menú de navegación */}
       <NavigationMenu>
-        <NavigationMenuList className="flex space-x-4">
+        <NavigationMenuList className="flex space-x-4 ">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <DropDownCategoria />
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link to="/About" className="hover:text-blue-500 transition hidden lg:block">Vender</Link>
+              <Link to="/products/ProductCreate" className="hover:text-amber-500 transition hidden lg:block hover:underline">Vender</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>

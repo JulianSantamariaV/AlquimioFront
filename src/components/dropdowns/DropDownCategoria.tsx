@@ -12,7 +12,7 @@ const DropDownCategoria: React.FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <p className="hover:text-blue-500 cursor-pointer">Categorias</p>
+                <p className="hover:text-amber-500 transition hidden lg:block hover:underline cursor-pointer">Categorias</p>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-72">
                 <DropdownMenuLabel>Categorias</DropdownMenuLabel>
