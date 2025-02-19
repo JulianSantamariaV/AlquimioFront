@@ -62,15 +62,15 @@ const CardRegister: React.FC = () => {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="firstName">Nombre</Label>
-              <Input id="firstName" placeholder="Nombre" value={formData.firstName} onChange={handleChange} />
+              <Input id="firstName" autoComplete="given-name" placeholder="Nombre" value={formData.firstName} onChange={handleChange} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="lastName">Apellido</Label>
-              <Input id="lastName" placeholder="Apellido" value={formData.lastName} onChange={handleChange} />
+              <Input id="lastName" autoComplete="family-name" placeholder="Apellido" value={formData.lastName} onChange={handleChange} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Contraseña</Label>
-              <Input type="password" id="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} />
+              <Input type="password" autoComplete="new-password" id="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">Correo Electrónico</Label>

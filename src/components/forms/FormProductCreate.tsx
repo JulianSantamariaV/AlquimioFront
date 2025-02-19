@@ -1,41 +1,67 @@
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useForm, FormProvider } from "react-hook-form";
-import { Button } from "../ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { productSchema } from "@/schemas/productSchema"; // 👈 Importamos el esquema
+import { z } from "zod";
 import axios from "axios";
-import Iproducto from "../interfaces/Iproducto";
-
+import { Button } from "../ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from "../ui/select";
+import FileUploader from "../uploaders/FileUploader";
 
 const FormProductCreate: React.FC = () => {
-  const form = useForm<Iproducto>();
-  const baseURL = "http://localhost:3000/product/Create";
+  const form = useForm<z.infer<typeof productSchema>>({
+    resolver: zodResolver(productSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      stock: 1,
+      // condition: 1,
+      price: 1,
+      categoryid: 1,
+      sellerid: 1,
+      images: [],
+    },
+  });
 
-  const onSubmit = async (data: Iproducto) => {
+  const baseURL = "http://localhost:3001/products";
+
+
+
+  const onSubmit = async (data: z.infer<typeof productSchema>) => {
     console.log("Datos enviados:", data);
     await createPost(data);
   };
 
-  const createPost = async (productData: Iproducto) => {
+  const createPost = async (productData: z.infer<typeof productSchema>) => {
     const formData = new FormData();
-    formData.append("productName", productData.productName);
-    formData.append("quantity", productData.quantity.toString());
-    formData.append("status", productData.status);
-    formData.append("price", productData.price.toString());
 
-    if (productData.foto instanceof File) {
-      formData.append("foto", productData.foto);
-    } else {
-      formData.append("foto", productData.foto);
-    }
+    Object.entries(productData).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        if (key === "images" && Array.isArray(value)) {
+          value.forEach((file) => formData.append("images", file));
+        } else if (typeof value === "number" || typeof value === "string") {
+          formData.append(key, value.toString());
+        }
+      }
+    });
 
     try {
       const response = await axios.post(baseURL, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log("Producto creado:", response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error al crear producto:", error);
+      console.error("Detalles del error:", error.response?.data); 
+      console.error("Mensajes de validación:", error.response?.data?.message); 
     }
+    
   };
 
   return (
@@ -45,14 +71,27 @@ const FormProductCreate: React.FC = () => {
           {/* Nombre del producto */}
           <FormField
             control={form.control}
-            name="productName"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Nombre del producto</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nombre del producto" {...field} />
+                  <Input placeholder="Nombre" {...field} />
                 </FormControl>
-                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Descripción */}
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Descripción</FormLabel>
+                <FormControl>
+                  <Input placeholder="Descripción" {...field} />
+                </FormControl>
               </FormItem>
             )}
           />
@@ -60,32 +99,46 @@ const FormProductCreate: React.FC = () => {
           {/* Cantidad */}
           <FormField
             control={form.control}
-            name="quantity"
+            name="stock"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cantidad</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="Cantidad" {...field} />
+                  <Input 
+                  type="number" 
+                  placeholder="Cantidad" 
+                  {...field} 
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                  />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Estado */}
-          <FormField
+          {/* Estado (Select) */}
+          {/* <FormField
             control={form.control}
-            name="status"
+            name="condition"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Estado</FormLabel>
-                <FormControl>
-                  <Input placeholder="Estado" {...field} />
-                </FormControl>
-                <FormMessage />
+                <Select onValueChange={(value) => field.onChange(Number(value))} value={String(field.value)}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Condicion" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Estado del producto</SelectLabel>
+                      <SelectItem value="1">Normal</SelectItem>
+                      <SelectItem value="2">Bueno</SelectItem>
+                      <SelectItem value="3">Muy bueno</SelectItem>
+                      <SelectItem value="4">Excelente</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
-          />
+          /> */}
 
           {/* Precio */}
           <FormField
@@ -95,12 +148,30 @@ const FormProductCreate: React.FC = () => {
               <FormItem>
                 <FormLabel>Precio</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="Precio" {...field} />
+                  <Input 
+                  type="number" 
+                  placeholder="Precio" 
+                  {...field}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
+                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
-          /> 
+          />
+
+          <FormField
+            control={form.control}
+            name="images"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Fotos</FormLabel>
+                <FormControl>
+                  <FileUploader onFileSelect={field.onChange} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
 
           {/* Botón */}
           <Button className="text-gray-100 bg-amber-600 hover:bg-amber-700 transition" type="submit">

@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { CarouselProps } from "../interfaces/ICarousel";
+import { CarouselProps } from "../../utils/types/interfaces/ICarousel";
 
 const CarouselTest: React.FC<CarouselProps> = ({ children, carouselImg }) => {
   const plugin = React.useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));

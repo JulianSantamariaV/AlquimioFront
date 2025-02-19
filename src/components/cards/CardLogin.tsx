@@ -57,6 +57,7 @@ const CardLogin: React.FC = () => {
                 type="email"
                 id="Email"
                 placeholder="Corre Electronico"
+                autoComplete="email"
               />
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -66,6 +67,7 @@ const CardLogin: React.FC = () => {
                 type="password"
                 id="password"
                 placeholder="Contraseña"
+                autoComplete="current-password"
               />
             </div>
           </div>

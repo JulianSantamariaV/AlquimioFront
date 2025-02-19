@@ -1,0 +1,1 @@
+export type uploadStatus = "idle" | "uploading" | "success" | "error";

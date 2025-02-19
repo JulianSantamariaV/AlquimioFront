@@ -1,5 +1,5 @@
 import Autoplay from "embla-carousel-autoplay";
-import { CarouselProps } from "../interfaces/ICarousel";
+import { CarouselProps } from "../../utils/types/interfaces/ICarousel";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "../ui/carousel";
 import React from "react";
 
