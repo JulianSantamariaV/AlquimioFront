@@ -19,13 +19,13 @@ const DropDownCategoria: React.FC = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        xxxx
+                        Motos
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        xxxx
+                        Carros
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                        xxxx
+                        Apartamentos
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
 
