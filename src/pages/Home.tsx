@@ -12,6 +12,10 @@ function Home() {
   ];
 
   const [index, setIndex] = useState(0);
+  const baseUrl = "http://localhost:3001/products";
+
+  const getProduct = 
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,16 +36,16 @@ function Home() {
 
       {/* Productos */}
       <div className="col-start-2 row-start-2">
-        <ProductCard />
+        <ProductCard{} />
       </div>
       <div className="col-start-2 row-start-3">
-        <ProductCard />
+        <ProductCard{} />
       </div>
 
       {/* Cards Grandes */}
       <div className="col-span-2 row-span-2 col-start-3 row-start-2">
-        <ProductWideCard />
-        <ProductWideCard />
+        <ProductWideCard name={} />
+        <ProductWideCard{} />
       </div>
       <div className="col-span-2 row-span-2 col-start-3 row-start-3">
         <ProductWideCard />

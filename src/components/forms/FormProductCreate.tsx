@@ -31,8 +31,6 @@ const FormProductCreate: React.FC = () => {
 
   const baseURL = "http://localhost:3001/products";
 
-
-
   const onSubmit = async (data: z.infer<typeof productSchema>) => {
     console.log("Datos enviados:", data);
     await createPost(data);

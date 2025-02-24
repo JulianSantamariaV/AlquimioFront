@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -18,37 +16,52 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Link } from "react-router-dom";
+import { userSchema } from "@/schemas/userSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import axios from "axios";
+import { z } from "zod";
+import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 
 const CardRegister: React.FC = () => {
- 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    password: "",
-    email: "",
-    country: "",
+  const form = useForm<z.infer<typeof userSchema>>({
+    resolver: zodResolver(userSchema),
+    defaultValues: {
+      name: "",
+      lastname: "",
+      email: "",
+      phonenumber: "",
+      photo: undefined,
+      birthdate: undefined,
+      password: "",
+      rol: 1,
+      address: [
+        {
+          street: "",
+          city: "",
+          state: "",
+          country: "",
+          postalCode: "",
+        },
+      ],
+    },
   });
 
+  const baseUrl = "http://localhost:3000/user";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+  const onSubmit = async (data: z.infer<typeof userSchema>) => {
+    console.log("Datos enviados:", data);
+    await createPost(data);
   };
 
-  
-  const handleSelectChange = (value: string) => {
-    setFormData({
-      ...formData,
-      country: value,
-    });
-  };
-
-  
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); 
-    console.log("Datos enviados:", formData); 
+  const createPost = async (userData: z.infer<typeof userSchema>) => {
+    try {
+      const response = await axios.post(baseUrl, userData);
+      console.log("Producto creado:", response.data);
+    } catch (error: any) {
+      console.error("Error al crear producto:", error);
+      console.error("Detalles del error:", error.response?.data);
+    }
   };
 
   return (
@@ -58,46 +71,98 @@ const CardRegister: React.FC = () => {
         <CardDescription>Completa tus datos para registrarte</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit}> 
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="firstName">Nombre</Label>
-              <Input id="firstName" autoComplete="given-name" placeholder="Nombre" value={formData.firstName} onChange={handleChange} />
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="grid w-full items-center gap-4">
+              {/* Nombre */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nombre</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Nombre" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              {/* Apellido */}
+              <FormField
+                control={form.control}
+                name="lastname"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Apellido</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Apellido" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              {/* Contraseña */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contraseña</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="Contraseña" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              {/* Correo Electrónico */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Correo Electrónico</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="Correo Electrónico" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              {/* País */}
+              <FormField
+                control={form.control}
+                name="address.0.country"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>País</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona tu país" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="colombia">Colombia</SelectItem>
+                          <SelectItem value="peru">Perú</SelectItem>
+                          <SelectItem value="ecuador">Ecuador</SelectItem>
+                          <SelectItem value="estadosUnidos">Estados Unidos</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="lastName">Apellido</Label>
-              <Input id="lastName" autoComplete="family-name" placeholder="Apellido" value={formData.lastName} onChange={handleChange} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password">Contraseña</Label>
-              <Input type="password" autoComplete="new-password" id="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="email">Correo Electrónico</Label>
-              <Input type="email" id="email" placeholder="Correo Electrónico" value={formData.email} onChange={handleChange} />
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="country">País</Label>
-              <Select onValueChange={handleSelectChange}>
-                <SelectTrigger id="country">
-                  <SelectValue placeholder="Selecciona tu país" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="colombia">Colombia</SelectItem>
-                  <SelectItem value="peru">Perú</SelectItem>
-                  <SelectItem value="ecuador">Ecuador</SelectItem>
-                  <SelectItem value="estadosUnidos">Estados Unidos</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <CardFooter className="flex justify-between mt-4">
-            <Link to="/">
-              <Button variant="destructive">Cancelar</Button>
-            </Link>
-            <Button type="submit">Registrarse</Button>
-          </CardFooter>
-        </form>
+
+            <CardFooter className="flex justify-between mt-4">
+              <Link to="/">
+                <Button variant="destructive">Cancelar</Button>
+              </Link>
+              <Button type="submit">Registrarse</Button>
+            </CardFooter>
+          </form>
+        </FormProvider>
       </CardContent>
     </Card>
   );

@@ -8,5 +8,6 @@ export const productSchema = z.object({
   price: z.number().min(1, "El precio debe ser mayor a 0"),
   categoryid: z.number().min(1),
   sellerid: z.number().min(1),
-  images: z.array(z.instanceof(File)).optional(), 
+  images: z.array(z.instanceof(File)).optional(),
+   
 });
