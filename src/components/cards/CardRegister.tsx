@@ -31,23 +31,24 @@ const CardRegister: React.FC = () => {
       lastname: "",
       email: "",
       phonenumber: "",
+      username:"",
       photo: undefined,
       birthdate: undefined,
       password: "",
       rol: 1,
-      address: [
-        {
-          street: "",
-          city: "",
-          state: "",
-          country: "",
-          postalCode: "",
-        },
-      ],
+      // address: [
+      //   {
+      //     street: "",
+      //     city: "",
+      //     state: "",
+      //     country: "",
+      //     postalCode: "",
+      //   },
+      // ],
     },
   });
 
-  const baseUrl = "http://localhost:3000/user";
+  const baseUrl = "http://localhost:3000/auth/register";
 
   const onSubmit = async (data: z.infer<typeof userSchema>) => {
     console.log("Datos enviados:", data);
@@ -56,8 +57,19 @@ const CardRegister: React.FC = () => {
 
   const createPost = async (userData: z.infer<typeof userSchema>) => {
     try {
-      const response = await axios.post(baseUrl, userData);
-      console.log("Producto creado:", response.data);
+      const { name, lastname, password, email, username } = userData;
+      console.log(username);
+      axios
+        .post(baseUrl, {
+          username,
+          name,
+          lastname,
+          email,
+          password,
+        })
+        .then((response) => {
+          console.log(response.data); // logic of token
+        });
     } catch (error: any) {
       console.error("Error al crear producto:", error);
       console.error("Detalles del error:", error.response?.data);
@@ -74,6 +86,19 @@ const CardRegister: React.FC = () => {
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid w-full items-center gap-4">
+               {/* Nombre */}
+               <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Usuario</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Usuario" {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
               {/* Nombre */}
               <FormField
                 control={form.control}
@@ -131,7 +156,7 @@ const CardRegister: React.FC = () => {
               />
 
               {/* País */}
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="address.0.country"
                 render={({ field }) => (
@@ -152,7 +177,7 @@ const CardRegister: React.FC = () => {
                     </FormControl>
                   </FormItem>
                 )}
-              />
+              /> */}
             </div>
 
             <CardFooter className="flex justify-between mt-4">
