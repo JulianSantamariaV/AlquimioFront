@@ -4,7 +4,7 @@ interface Iproducto {
   stock: number;
   status: number;
   price: number;
-  foto: string | File;
+  image: string | File;
   categoryid : number;
   sellerid : number;
 

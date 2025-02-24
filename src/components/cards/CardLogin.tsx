@@ -19,7 +19,6 @@ const CardLogin: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const baseURL = "http://localhost:3000/auth/login";
  // const [post, setPost] = React.useState(null);
