@@ -25,7 +25,7 @@ const FormProductCreate: React.FC = () => {
       price: 1,
       categoryid: 1,
       sellerid: 1,
-      images: [],
+      image: [],
     },
   });
 
@@ -159,7 +159,7 @@ const FormProductCreate: React.FC = () => {
 
           <FormField
             control={form.control}
-            name="images"
+            name="image"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Fotos</FormLabel>
