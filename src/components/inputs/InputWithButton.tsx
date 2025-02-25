@@ -1,11 +1,21 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
- 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+
 export function InputWithButton() {
   return (
-    <div className="flex w-full max-w-sm items-center space-x-2">
-      <Input className="bg-white text-emerald-600 border-b-amber-200" type="text" placeholder="Articulo..." />
-      <Button className="hover:text-amber-500" variant="outline" type="submit">Buscar</Button>
+    <div className="flex w-full max-w-sm items-center mx-5">
+      <Input
+        className="bg-white text-gray-900 border border-gray-300 focus:border-amber-400 focus:ring-amber-400 rounded-l-lg rounded-r-none px-4 py-2"
+        type="text"
+        placeholder="Buscar artículo..."
+      />
+      <Button
+        className="bg-amber-400 hover:bg-amber-500 text-gray-900 rounded-l-none rounded-r-lg p-2 cursor-pointer"
+        type="submit"
+      >
+        <Search className="w-5 h-5" />
+      </Button>
     </div>
-  )
+  );
 }
