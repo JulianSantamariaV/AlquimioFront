@@ -8,14 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userSchema } from "@/schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -24,6 +17,7 @@ import { z } from "zod";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 
 const CardRegister: React.FC = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
     defaultValues: {
@@ -31,7 +25,7 @@ const CardRegister: React.FC = () => {
       lastname: "",
       email: "",
       phonenumber: "",
-      username:"",
+      username: "",
       photo: undefined,
       birthdate: undefined,
       password: "",
@@ -69,7 +63,9 @@ const CardRegister: React.FC = () => {
         })
         .then((response) => {
           console.log(response.data); // logic of token
-        });
+          navigate("/login");
+        })
+        .catch((e) => console.error(e));
     } catch (error: any) {
       console.error("Error al crear producto:", error);
       console.error("Detalles del error:", error.response?.data);
@@ -86,8 +82,8 @@ const CardRegister: React.FC = () => {
         <FormProvider {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid w-full items-center gap-4">
-               {/* Nombre */}
-               <FormField
+              {/* Nombre */}
+              <FormField
                 control={form.control}
                 name="username"
                 render={({ field }) => (
@@ -135,7 +131,11 @@ const CardRegister: React.FC = () => {
                   <FormItem>
                     <FormLabel>Contraseña</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="Contraseña" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="Contraseña"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}
@@ -149,7 +149,11 @@ const CardRegister: React.FC = () => {
                   <FormItem>
                     <FormLabel>Correo Electrónico</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Correo Electrónico" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="Correo Electrónico"
+                        {...field}
+                      />
                     </FormControl>
                   </FormItem>
                 )}

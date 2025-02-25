@@ -9,39 +9,37 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import React from "react";
 
-
 const CardLogin: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
   const baseURL = "http://localhost:3000/auth/login";
- // const [post, setPost] = React.useState(null);
-  function createPost( password: any, email: any) { // change any
+  // const [post, setPost] = React.useState(null);
+  function createPost(password: any, email: any) {
+    // change any
     axios
       .post(baseURL, {
-       password,
-       email
+        password,
+        email,
       })
       .then((response) => {
-        console.log(response.data)
-      });
+        console.log(response.data);
+        navigate("/");
+      })
+      .catch((e) => console.error(e));
   }
 
   return (
     <Card className="w-[350px]">
       <form
-        onSubmit={handleSubmit((data) =>
-        { console.log(data)
-          createPost(data.password,data.email)
-        }
-       
-        )}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          createPost(data.password, data.email);
+        })}
       >
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
