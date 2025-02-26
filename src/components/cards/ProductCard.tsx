@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, image = [] }) =>
               loading ? "opacity-0" : "opacity-100"
             }`}
             onLoad={() => setLoading(false)}
-            onError={() => setImageUrl("/placeholder.jpg")} // 🔥 Si falla, usar placeholder
+            onError={() => setImageUrl("/placeholder.jpg")}
           />          
         </div>
 

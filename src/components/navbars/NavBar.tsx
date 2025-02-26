@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
         <div>
           <Link to="/services/ServicesHome">
             <Button variant="ghost" className="text-white hover:text-amber-400 transition hover:bg-inherit cursor-pointer">
-              Ingresa
+              Servicios
             </Button>
           </Link>
         </div>
