@@ -13,7 +13,7 @@ const ProductWideCard: React.FC<IProductDisplay> = ({ name, image, description, 
       <div className="relative w-full md:w-2/5 h-40 bg-gray-100">
         {loading && <Skeleton className="absolute inset-0 w-full h-full" />}
         <img
-          src={image}
+          src={image?.[0] || "/placeholder.jpg"}
           alt={name}
           className={`w-full h-full object-cover transition-opacity duration-300 ${
             loading ? "opacity-0" : "opacity-100"

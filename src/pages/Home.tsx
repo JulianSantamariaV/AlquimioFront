@@ -5,11 +5,15 @@ import { useProducts } from "@/hooks/useProduct";
 const HomePage = () => {
   const { products, loading, error } = useProducts();
 
+  console.log(products);
+
   if (loading) return <p className="text-center">Cargando productos...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (error) return <p className="text-center text-gray-700">{error}</p>;
 
   return (
-    <section className="container mx-auto p-6">
+    
+    
+    <section className="container mx-auto max-w-3xl p-6">
       <h1 className="text-2xl font-bold text-slate-800">Productos Destacados</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">

@@ -1,6 +1,6 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { productSchema } from "@/schemas/productSchema"; // 👈 Importamos el esquema
+import { productSchema } from "@/schemas/productSchema";
 import { z } from "zod";
 import axios from "axios";
 import { Button } from "../ui/button";
@@ -11,7 +11,6 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from "../ui/select";
 import FileUploader from "../uploaders/FileUploader";
 
 const FormProductCreate: React.FC = () => {

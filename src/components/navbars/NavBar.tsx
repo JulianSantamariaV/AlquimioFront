@@ -55,12 +55,23 @@ const Navbar: React.FC = () => {
 
 
       <div className="bg-gray-700 text-white flex items-center justify-start px-6 py-2 text-sm space-x-10">
+
         <div>
           <DropDownCategoria />
         </div>
+
+        <div>
+          <Link to="/services/ServicesHome">
+            <Button variant="ghost" className="text-white hover:text-amber-400 transition hover:bg-inherit cursor-pointer">
+              Ingresa
+            </Button>
+          </Link>
+        </div>
+
         <div className="md:hidden">
           <InputWithButton />
         </div>
+
       </div>
     </header>
   );

@@ -10,11 +10,21 @@ export const useProducts = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.get<IProductDisplay[]>(API_URL)
-      .then(response => setProducts(response.data))
-      .catch(error => setError("Error al cargar productos"))
+    axios
+      .get<IProductDisplay[]>(API_URL)
+      .then((response) => {
+        console.log("API Response:", response.data);
+        setProducts(
+          response.data.map((product) => ({
+            ...product,
+            image: Array.isArray(product.image) ? product.image : [], 
+          }))
+        );
+      })
+      .catch(() => setError("Producto no disponible"))
       .finally(() => setLoading(false));
   }, []);
+  
 
   return { products, loading, error };
 };

@@ -6,6 +6,7 @@ import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import ProductCreate from "@/pages/products/ProductCreate";
 import Register from "@/pages/Register";
+import { ServicesHome } from "@/pages/services/ServicesHome";
 import UserProfile from "@/pages/user/UserProfile";
 
 import { Routes, Route } from "react-router-dom";
@@ -18,7 +19,8 @@ function AppRoutes() {
         <Route path='/' element={<Home />} />
         <Route path="/user/UserProfile" element={<UserProfile />} />
         <Route path="/Help" element={<Help />} />
-        <Route path="/products/ProductCreate" element={<ProductCreate/>}/>        
+        <Route path="/products/ProductCreate" element={<ProductCreate/>}/>  
+        <Route path="/services/home"  element={<ServicesHome/>}   /> 
       </Route>
 
       {/* Rutas sin Navbar */}
