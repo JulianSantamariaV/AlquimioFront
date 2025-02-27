@@ -1,5 +1,6 @@
 import ProductCard from "@/components/cards/ProductCard";
 import ProductWideCard from "@/components/cards/ProductWideCard";
+import { ServicesIcons } from "@/components/carousel/CarouselServicesIcons";
 import { useProducts } from "@/hooks/useProduct";
 
 const HomePage = () => {
@@ -22,7 +23,15 @@ const HomePage = () => {
         ))}
       </div>
 
-      <h2 className="text-xl font-bold text-slate-800">Ofertas Especiales</h2>
+        <hr></hr>
+
+        <h2 className="text-xl font-bold text-slate-800">Nuestros Servicios</h2>
+
+        <ServicesIcons/>
+
+        <hr></hr>
+
+      <h3 className="text-xl font-bold text-slate-800">Ofertas Especiales</h3>
 
       <div className="flex flex-col gap-4 my-6">
         {products.slice(3, 5).map((product) => (

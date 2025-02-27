@@ -1,5 +1,9 @@
+import { ServicesIcons } from "@/components/carousel/CarouselServicesIcons"
+
 export const ServicesHome = () => {
   return (
-    <p>hola</p>
+    <div className="justify-center items-center max-w-full">
+      <ServicesIcons/>        
+      </div>    
   )
-}
+} 

@@ -26,9 +26,9 @@ const ProductWideCard: React.FC<IProductDisplay> = ({ name, image, description, 
         <CardHeader className="p-0">
           <CardTitle className="text-lg md:text-xl text-emerald-600">{name}</CardTitle>
           <CardDescription className="text-sm text-slate-900 opacity-70">{description}</CardDescription>
-          <p className="text-md font-medium text-emerald-400">${price}</p>
+          <p className="text-md font-medium text-amber-500">${price}</p>
         </CardHeader>
-        <Button className="mt-4 w-full md:w-auto bg-amber-600 text-white">Comprar</Button>
+        <Button className="mt-4 w-full md:w-auto bg-amber-600 text-white">Rentar</Button>
       </div>
     </Card>
   );
