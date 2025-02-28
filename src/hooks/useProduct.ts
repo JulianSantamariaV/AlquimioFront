@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IProductDisplay } from "@/utils/interfaces/IProductDisplay";
 
-const API_URL = "http://localhost:3001/products";
+const API_URL = "http://localhost:3000/products";
 
 export const useProducts = () => {
   const [products, setProducts] = useState<IProductDisplay[]>([]);
