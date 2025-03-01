@@ -9,36 +9,43 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/schemas/userSchema";
+import { toast, ToastContainer } from "react-toastify";
+import { login } from "../apiCalls/Auth";
 
 const CardLogin: React.FC = () => {
-  const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  const baseURL = "http://localhost:3000/auth/login";
-  // const [post, setPost] = React.useState(null);
-  function createPost(password: any, email: any) {
-    // change any
-    axios
-      .post(baseURL, {
-        password,
-        email,
-      })
-      .then((response) => {
-        console.log(response.data);
-        navigate("/");
-      })
-      .catch((e) => console.error(e));
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+ ;
 
   return (
     <Card className="w-[350px]">
       <form
         onSubmit={handleSubmit((data) => {
-          console.log(data);
-          createPost(data.password, data.email);
+          login(data.password, data.email)
+            .catch((e) => {
+              toast("Credenciales incorrectas", {
+                type: "error",
+                autoClose: 4000,
+                position: "top-center",
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              console.error(e);
+            })
+         
         })}
       >
         <CardHeader>
@@ -56,6 +63,9 @@ const CardLogin: React.FC = () => {
                 placeholder="Corre Electronico"
                 autoComplete="email"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="Password"></Label>
@@ -66,6 +76,11 @@ const CardLogin: React.FC = () => {
                 placeholder="Contraseña"
                 autoComplete="current-password"
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
           </div>
         </CardContent>
@@ -74,9 +89,12 @@ const CardLogin: React.FC = () => {
             <Button variant="destructive">Cancelar</Button>
           </Link>
           {/* INGRESAR */}
-          <Button type="submit">Ingresar</Button>
+          <Button type="submit">
+            {isSubmitting ? "Ingresando..." : "Ingresar"}
+          </Button>
         </CardFooter>
       </form>
+      <ToastContainer />
     </Card>
   );
 };
