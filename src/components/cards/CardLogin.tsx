@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { login } from "../apiCalls/Auth";
+import { login, token } from "../apiCalls/Auth";
 
 const CardLogin: React.FC = () => {
   const {
@@ -25,27 +25,28 @@ const CardLogin: React.FC = () => {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
- ;
+  const navigate = useNavigate();
 
   return (
     <Card className="w-[350px]">
       <form
         onSubmit={handleSubmit((data) => {
-          login(data.password, data.email)
-            .catch((e) => {
-              toast("Credenciales incorrectas", {
-                type: "error",
-                autoClose: 4000,
-                position: "top-center",
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-              console.error(e);
-            })
-         
+          login(data.password, data.email).catch((e) => {
+            toast("Credenciales incorrectas", {
+              type: "error",
+              autoClose: 4000,
+              position: "top-center",
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            console.error(e);
+          });
+          if (token) {
+            navigate("/");
+          }
         })}
       >
         <CardHeader>

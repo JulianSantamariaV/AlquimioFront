@@ -12,9 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { userSchema } from "@/schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import axios from "axios";
 import { z } from "zod";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { register, token } from "../apiCalls/Auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const CardRegister: React.FC = () => {
   const navigate = useNavigate();
@@ -42,33 +43,23 @@ const CardRegister: React.FC = () => {
     },
   });
 
-  const baseUrl = "http://localhost:3000/auth/register";
-
   const onSubmit = async (data: z.infer<typeof userSchema>) => {
     console.log("Datos enviados:", data);
-    await createPost(data);
-  };
-
-  const createPost = async (userData: z.infer<typeof userSchema>) => {
-    try {
-      const { name, lastname, password, email, username } = userData;
-      console.log(username);
-      axios
-        .post(baseUrl, {
-          username,
-          name,
-          lastname,
-          email,
-          password,
-        })
-        .then((response) => {
-          console.log(response.data); // logic of token
-          navigate("/login");
-        })
-        .catch((e) => console.error(e));
-    } catch (error: any) {
-      console.error("Error al crear producto:", error);
-      console.error("Detalles del error:", error.response?.data);
+    await register(data).catch((e) => {
+      toast("Error, intenta mas tarde", {
+        type: "error",
+        autoClose: 4000,
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.error(e);
+    });
+    if (token) {
+      navigate("/");
     }
   };
 
@@ -193,6 +184,7 @@ const CardRegister: React.FC = () => {
           </form>
         </FormProvider>
       </CardContent>
+      <ToastContainer />
     </Card>
   );
 };
