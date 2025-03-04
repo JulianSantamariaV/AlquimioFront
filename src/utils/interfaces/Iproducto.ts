@@ -1,4 +1,4 @@
-interface Iproducto {
+interface IProduct {
   name: string;
   description: string;
   stock: number;
@@ -10,4 +10,4 @@ interface Iproducto {
 
 }
 
-export default Iproducto
+export default IProduct

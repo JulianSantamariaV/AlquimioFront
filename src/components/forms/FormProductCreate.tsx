@@ -7,7 +7,7 @@ import { FormProductFields } from "./FormProductFields";
 import FileUploader from "../uploaders/FileUploader";
 import { createProduct } from "@/services/productService";
 
-const ProductForm: React.FC = () => {
+const FormProductForm: React.FC = () => {
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -51,4 +51,4 @@ const ProductForm: React.FC = () => {
   );
 };
 
-export default ProductForm;
+export default FormProductForm;

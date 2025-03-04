@@ -1,6 +1,4 @@
 export const ServicesCreate = () => {
-    return (
-      <div>ServicesCreate</div>
-    )
-  }
+    return ( <div>Servicios</div>)
+  };
   

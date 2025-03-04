@@ -14,17 +14,16 @@ import { decodedToken } from "../apiCalls/Auth";
 
 const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(window.scrollY);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setIsVisible(false); // Ocultar cuando baja
-      } else {
-        setIsVisible(true); // Mostrar cuando sube
-      }
-      lastScrollY = window.scrollY;
+      const currentScrollY = window.scrollY;
+
+      if (Math.abs(currentScrollY - lastScrollY.current) < 10) return;
+
+      setIsVisible(currentScrollY < lastScrollY.current);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,9 +31,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <header className="w-full  sticky inset-0 z-50 inline-block">
+    <header className="w-full sticky inset-0 z-50">
       {/* Barra superior */}
-      <nav className="bg-gray-800 text-white flex items-center justify-between px-6 py-4 z-50">
+      <nav className="bg-gray-800 text-white flex items-center justify-between px-6 py-4 h-20">
         {/* Logo */}
         <Link
           to="/"
@@ -98,7 +97,10 @@ const Navbar: React.FC = () => {
               </>
             )}
           </div>
-          <div className="md:hidden pl-10">
+        </div>
+
+        <div className="flex items-center space-x-3">
+          <div className="pl-10">
             <DropDownLogin />
           </div>
         </div>
