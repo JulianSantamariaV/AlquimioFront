@@ -10,7 +10,7 @@ import { InputWithButton } from "../inputs/InputWithButton";
 import { DropDownLogin } from "../dropdowns/DropDownLogin";
 import DropDownCategoria from "../dropdowns/DropDownCategoria";
 import { useEffect, useRef, useState } from "react";
-import { decodedToken } from "../apiCalls/Auth";
+
 
 const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -62,43 +62,6 @@ const Navbar: React.FC = () => {
         <div className="w-full max-w-lg hidden md:block">
           <InputWithButton />
         </div>
-
-        <div className="flex items-center space-x-3 px-10">
-          <div className="hidden md:flex space-x-3">
-            {decodedToken ? (
-              // Si el usuario está autenticado, mostrar su nombre
-              <Link to="/">
-                <Button
-                  variant="ghost"
-                  className="text-white hover:text-amber-400 transition hover:bg-inherit cursor-pointer"
-                >
-                  {decodedToken.name ?? decodedToken.username}
-                </Button>
-              </Link>
-            ) : (
-              // Si NO está autenticado, mostrar los botones de login y registro
-              <>
-                <Link to="/Login">
-                  <Button
-                    variant="ghost"
-                    className="text-white hover:text-amber-400 transition hover:bg-inherit cursor-pointer"
-                  >
-                    Ingresa
-                  </Button>
-                </Link>
-                <Link to="/Register">
-                  <Button
-                    variant="ghost"
-                    className="text-white hover:text-amber-400 transition hover:bg-inherit cursor-pointer"
-                  >
-                    Regístrate
-                  </Button>
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-
         <div className="flex items-center space-x-3">
           <div className="pl-10">
             <DropDownLogin />

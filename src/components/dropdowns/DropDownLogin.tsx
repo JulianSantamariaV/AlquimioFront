@@ -1,49 +1,67 @@
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu";
-  import { Menu, User } from "lucide-react";
-  import { Link } from "react-router-dom";
-  
-  export function DropDownLogin() {
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="p-2 rounded-full hover:bg-gray-700 transition flex">
-            <Menu className="w-6 h-6 text-white"/>
-            <User className="w-6 h-6 text-white" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">
-          <DropdownMenuLabel className="bg-gray-700 text-white font-semibold">Alquimio</DropdownMenuLabel>
-          <DropdownMenuSeparator className="bg-gray-600" />
-          <div className="bg-white">
-          <DropdownMenuGroup>
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, User } from "lucide-react";
+import { Link } from "react-router-dom";
+import { decodedToken } from "../apiCalls/Auth";
+
+export function DropDownLogin() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="p-2 rounded-full hover:bg-gray-700 transition flex">
+          <Menu className="w-6 h-6 text-white" />
+          <User className="w-6 h-6 text-white" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">
+        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold">
+          Alquimio
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator className="bg-gray-600" />
+        <div className="bg-white">
+          {decodedToken ? (
             <DropdownMenuItem asChild>
-              <Link to="/Login" className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md">
-                Ingresar
+              <Link
+                to="/" // to="/Profile"
+                className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
+              >
+                Mi perfil
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link to="/Register" className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md">
-                Registrarse
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          
+          ) : (
+            <DropdownMenuGroup>
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/Login"
+                  className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
+                >
+                  Ingresar
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/Register"
+                  className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
+                >
+                  Registrarse
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          )}
           <DropdownMenuSeparator className="bg-gray-600 mx-3" />
-          
+
           <DropdownMenuItem className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
             Soporte
           </DropdownMenuItem>
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  }
-  
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
