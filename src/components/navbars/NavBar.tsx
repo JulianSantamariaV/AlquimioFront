@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { InputWithButton } from "../inputs/InputWithButton";
 import { DropDownLogin } from "../dropdowns/DropDownLogin";
 import DropDownCategoria from "../dropdowns/DropDownCategoria";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { decodedToken } from "../apiCalls/Auth";
 
 const Navbar: React.FC = () => {
