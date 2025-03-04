@@ -1,17 +1,18 @@
 
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
-import ServicesLayout from "@/layouts/ServicesLayout";
 import Help from "@/pages/Help";
 import Home from "@/pages/Home";
-import Login from "@/pages/Login";
+import Login from "@/pages/user/UserLogin";
 import ProductCreate from "@/pages/products/ProductCreate";
-import Register from "@/pages/Register";
+import Register from "@/pages/user/UserRegister";
 import { ServicesCreate } from "@/pages/services/ServicesCreate";
 import { ServicesHome } from "@/pages/services/ServicesHome";
 import UserProfile from "@/pages/user/UserProfile";
-
 import { Routes, Route } from "react-router-dom";
+import About from "@/pages/About";
+import ProfileLayout from "@/layouts/ProfileLayout";
+import ProductHome from "@/pages/products/ProductHome";
 
 function AppRoutes() {
   return (
@@ -21,8 +22,11 @@ function AppRoutes() {
         <Route path='/' element={<Home />} />
         <Route path="/user/UserProfile" element={<UserProfile />} />
         <Route path="/Help" element={<Help />} />
+        <Route path="/about" element={<About />} />
         <Route path="/products/ProductCreate" element={<ProductCreate />} />
-
+        <Route path="/products/ProductHome" element={<ProductHome />} />
+        <Route path="/services/ServicesHome" element={<ServicesHome />} />
+        <Route path="/services/ServicesCreate" element={<ServicesCreate />} />
       </Route>
 
       {/* Rutas sin Navbar */}
@@ -31,12 +35,10 @@ function AppRoutes() {
         <Route path="/Register" element={<Register />} />
       </Route>
 
-      <Route element={<ServicesLayout/>}>
-        <Route path="/services/ServicesHome" element={<ServicesHome />} />
-        <Route path="/services/ServicesCreate" element={<ServicesCreate />} />
+      <Route element={<ProfileLayout/>}>        
+        <Route path="/user/UserProfile" element={<UserProfile />} />
       </Route>
     </Routes>
-
   );
 }
 

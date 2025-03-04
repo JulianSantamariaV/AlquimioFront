@@ -1,22 +1,13 @@
 import { services } from "@/data/servicesData";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import React from "react";
-import Autoplay from "embla-carousel-autoplay";
+import { useAutoplayCarousel } from "@/hooks/useAutoplayCarousel";
 
 export const ServicesIcons = () => {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  );
+  const { carouselProps } = useAutoplayCarousel();
 
   return (
     <div className="w-full max-w-3xl mx-auto p-6">
-      <Carousel
-        className="w-full"
-        plugins={[plugin.current]} 
-        opts={{loop : true}}
-        onMouseEnter={() => plugin.current?.stop()}
-        onMouseLeave={() => plugin.current?.reset()}
-      >
+      <Carousel className="w-full" {...carouselProps} aria-label="Servicios">
         <CarouselContent className="-ml-1">
           {services.map(({ icon: Icon, color, label }, index) => (
             <CarouselItem key={index} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">

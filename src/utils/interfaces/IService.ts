@@ -1,4 +1,5 @@
-export interface  IProductDisplay {
+export interface  IServiceDisplay {
+    serviceid: number;
     name: string;
     description?: string;
     price: number;

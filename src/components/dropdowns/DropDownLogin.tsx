@@ -7,14 +7,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu";
-  import { User } from "lucide-react";
+  import { Menu, User } from "lucide-react";
   import { Link } from "react-router-dom";
   
   export function DropDownLogin() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="p-2 rounded-full hover:bg-gray-700 transition">
+          <button className="p-2 rounded-full hover:bg-gray-700 transition flex">
+            <Menu className="w-6 h-6 text-white"/>
             <User className="w-6 h-6 text-white" />
           </button>
         </DropdownMenuTrigger>

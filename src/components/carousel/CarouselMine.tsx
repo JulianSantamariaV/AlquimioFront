@@ -1,24 +1,22 @@
-import Autoplay from "embla-carousel-autoplay";
-import { CarouselProps } from "../../utils/types/interfaces/ICarousel";
+import { useAutoplayCarousel } from "@/hooks/useAutoplayCarousel";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "../ui/carousel";
 import React from "react";
+import { ICarouselProps } from "@/utils/interfaces/ICarouselProps";
 
 
 
-const CarouselMine: React.FC<CarouselProps> = ({ children, carouselImg }) => {
-  const plugin = React.useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
-  const stopAutoplay = () => plugin.current.stop();
-  const resetAutoplay = () => plugin.current.reset();
+export const CarouselMine: React.FC<ICarouselProps> = ({ carouselImg }) => {
+  const { carouselProps } = useAutoplayCarousel();
 
   return (
-    <div className="w-full h-full">
+    <div className="flex justify-center w-full">
       <Carousel
-        plugins={[plugin.current]}
-        onMouseEnter={stopAutoplay}
-        onMouseLeave={resetAutoplay}>
-
+      className="w-full h-80"
+        {...carouselProps}
+        aria-label="Hero"
+      >
         <CarouselContent>
-          {carouselImg?.length ? (
+          {carouselImg?.length > 0 ? (
             carouselImg.map((img, index) => (
               <CarouselItem key={index}>
                 <img
@@ -29,15 +27,17 @@ const CarouselMine: React.FC<CarouselProps> = ({ children, carouselImg }) => {
               </CarouselItem>
             ))
           ) : (
-            <CarouselItem>{children}</CarouselItem>
+            <CarouselItem>
+              <div className="flex items-center justify-center w-full h-80 bg-gray-200 text-gray-500">
+                No images available
+              </div>
+            </CarouselItem>
           )}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
     </div>
+
   );
 };
-
-
-export default CarouselMine;
