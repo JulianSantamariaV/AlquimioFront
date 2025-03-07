@@ -10,6 +10,8 @@ import {
 import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { decodedToken } from "../apiCalls/Auth";
+import ModalLogin from "../modals/Modal";
+
 
 export function DropDownLogin() {
   return (
@@ -38,12 +40,7 @@ export function DropDownLogin() {
           ) : (
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link
-                  to="/Login"
-                  className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
-                >
-                  Ingresar
-                </Link>
+                <ModalLogin/>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link

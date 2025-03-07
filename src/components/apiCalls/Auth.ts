@@ -35,9 +35,9 @@ export function setDecodedToken(token: string | null) {
 }
 export const login = async (email: string, password: string) => {
   return await axios
-    .post(baseURL + "/login", {
-      password,
+    .post(baseURL + "/login", {      
       email,
+      password,
     })
     .then((response) => {
       setToken(response.data.accessToken);

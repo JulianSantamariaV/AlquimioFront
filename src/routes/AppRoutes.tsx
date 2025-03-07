@@ -20,7 +20,6 @@ function AppRoutes() {
       {/* Rutas con Navbar */}
       <Route element={<MainLayout />}>
         <Route path='/' element={<Home />} />
-        <Route path="/user/UserProfile" element={<UserProfile />} />
         <Route path="/Help" element={<Help />} />
         <Route path="/about" element={<About />} />
         <Route path="/products/ProductCreate" element={<ProductCreate />} />
@@ -35,6 +34,7 @@ function AppRoutes() {
         <Route path="/Register" element={<Register />} />
       </Route>
 
+      {/* Rutas con SideBar */}
       <Route element={<ProfileLayout/>}>        
         <Route path="/user/UserProfile" element={<UserProfile />} />
       </Route>

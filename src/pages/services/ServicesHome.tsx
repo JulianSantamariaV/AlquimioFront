@@ -8,7 +8,7 @@ export const ServicesHome = () => {
   const { services, loading, error } = useService();
 
   if (loading) return <Skeleton className="w-full h-screen" />;
-  if (error) return <p className="text-center text-red-500 font-semibold">{error}</p>;
+  if (error) return <p className="text-center font-semibold">{error}</p>;
 
   return (
     <div className="w-full mx-auto">
