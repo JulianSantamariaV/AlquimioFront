@@ -17,7 +17,12 @@ import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
 import { login, token } from "../apiCalls/Auth";
 
-const CardLogin: React.FC = () => {
+interface CardLoginProps {
+  onSuccess?: () => void;
+  className?: string;
+}
+
+const CardLogin: React.FC<CardLoginProps> = ({ onSuccess, className }) => {
   const {
     register,
     handleSubmit,
@@ -28,7 +33,7 @@ const CardLogin: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="w-[350px]">
+    <Card className={`w-[350px] ${className}`}>
       <form
         onSubmit={handleSubmit((data) => {
           login(data.password, data.email).catch((e) => {
@@ -46,6 +51,9 @@ const CardLogin: React.FC = () => {
           });
           if (token) {
             navigate("/");
+          }
+          if (onSuccess) {
+            onSuccess();
           }
         })}
       >
