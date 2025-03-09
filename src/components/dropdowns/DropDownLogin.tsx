@@ -13,7 +13,6 @@ import { decodedToken } from "../apiCalls/Auth";
 import ModalLogin from "../modals/Modal";
 import { ModalRegister } from "../modals/ModalRegister";
 
-
 export function DropDownLogin() {
   return (
     <DropdownMenu>
@@ -39,12 +38,16 @@ export function DropDownLogin() {
               </Link>
             </DropdownMenuItem>
           ) : (
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <ModalLogin />
+            <DropdownMenuGroup className="flex flex-col">
+              <DropdownMenuItem asChild className="w-full">
+                <div className="w-full">
+                  <ModalLogin />
+                </div>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <ModalRegister />
+              <DropdownMenuItem asChild className="w-full">
+                <div className="w-full">
+                  <ModalRegister />
+                </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
           )}
