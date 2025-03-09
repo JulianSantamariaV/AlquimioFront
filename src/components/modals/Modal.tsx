@@ -31,7 +31,7 @@ const ModalLogin: React.FC = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}> 
       <DialogTrigger asChild>
-        <Button variant="ghost">Login</Button>
+        <Button variant="ghost" className="cursor-pointer">Login</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

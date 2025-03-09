@@ -23,7 +23,7 @@ export function DropDownLogin() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">
-        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold">
+        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold text-center">
           Alquimio
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-600" />
@@ -49,8 +49,8 @@ export function DropDownLogin() {
           )}
           <DropdownMenuSeparator className="bg-gray-600 mx-3" />
 
-          <DropdownMenuItem className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
-            Soporte
+          <DropdownMenuItem className="px-4 py-2 rounded-md cursor-pointer justify-center">
+            Contactanos
           </DropdownMenuItem>
         </div>
       </DropdownMenuContent>

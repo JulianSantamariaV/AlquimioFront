@@ -33,7 +33,7 @@ export const ModalRegister: React.FC = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost">Registrate</Button>
+        <Button variant="ghost" className="cursor-pointer">Registrate</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
