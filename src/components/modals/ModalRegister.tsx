@@ -1,51 +1,55 @@
 import { useState } from "react"; // ✅ Importar useState
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
-  DialogTitle, 
-  DialogHeader, 
-  DialogFooter 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogHeader,
+  DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/schemas/userSchema";
+import { userSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { login, token } from "../apiCalls/Auth";
+import { register as registro } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
-const ModalLogin: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false); 
+export const ModalRegister: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(userSchema),
   });
   const navigate = useNavigate();
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}> 
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost">Login</Button>
+        <Button variant="ghost" className="cursor-pointer">Registrate</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Ingresa</DialogTitle>
+          <DialogTitle>Bienvenido a Alquimio</DialogTitle>
+          <DialogDescription className="hover:text-black transition-colors">
+            Completa tus datos para registrarte
+          </DialogDescription>
         </DialogHeader>
         <form
-          onSubmit={handleSubmit(async (data) => {
-            console.log("Datos enviados:", data);
+          onSubmit={handleSubmit(async (data: z.infer<typeof userSchema>) => {
             try {
-              await login(data.email, data.password);
+              await registro(data);
               setIsOpen(false);
               navigate("/");
             } catch (e) {
-              toast("Credenciales incorrectas", {
+              toast("Error, intenta mas tarde", {
                 type: "error",
                 autoClose: 4000,
                 position: "top-center",
@@ -56,34 +60,87 @@ const ModalLogin: React.FC = () => {
                 progress: undefined,
               });
               console.error(e);
-            }})}
+            }
+          })}
         >
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="Email"></Label>
+              <Label htmlFor="Usuario"></Label>
+              <Input
+                {...register("username")}
+                type="username"
+                id="username"
+                placeholder="Usuario"
+              />
+              {errors.username && (
+                <p className="text-red-500 text-sm">
+                  {errors.username.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="Nombres"></Label>
+              <Input
+                {...register("name")}
+                type="name"
+                id="name"
+                placeholder="Nombre"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="Apellidos"></Label>
+              <Input
+                {...register("lastname")}
+                type="lastname"
+                id="lastname"
+                placeholder="Apellido"
+              />
+              {errors.lastname && (
+                <p className="text-red-500 text-sm">
+                  {errors.lastname.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="Correo Electrónico"></Label>
               <Input
                 {...register("email")}
                 type="email"
-                id="Email"
-                placeholder="Correo Electronico"
-                autoComplete="email"
+                id="email"
+                placeholder="Correo Electrónico"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="Password"></Label>
+              <Label htmlFor="Contraseña"></Label>
               <Input
                 {...register("password")}
                 type="password"
                 id="password"
                 placeholder="Contraseña"
-                autoComplete="current-password"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">
                   {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="Confirmar Contraseña"></Label>
+              <Input
+                {...register("confirmPassword")}
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirma tu contraseña"
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>
@@ -103,5 +160,3 @@ const ModalLogin: React.FC = () => {
     </Dialog>
   );
 };
-
-export default ModalLogin;

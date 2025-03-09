@@ -11,19 +11,19 @@ import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { decodedToken } from "../apiCalls/Auth";
 import ModalLogin from "../modals/Modal";
-
+import { ModalRegister } from "../modals/ModalRegister";
 
 export function DropDownLogin() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="p-2 rounded-full hover:bg-gray-700 transition flex">
-          <Menu className="w-6 h-6 text-white" />
-          <User className="w-6 h-6 text-white" />
+        <button className="p-2 px-2 rounded-full hover:bg-gray-600 bg-gray-400 w-full transition flex">
+          <Menu className="w-6 h-6 ml-1 pr-1 text-white" />
+          <User className="w-6 h-6 ml-1 text-white" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">
-        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold">
+        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold text-center">
           Alquimio
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-600" />
@@ -38,24 +38,19 @@ export function DropDownLogin() {
               </Link>
             </DropdownMenuItem>
           ) : (
-            <DropdownMenuGroup>
+            <DropdownMenuGroup className="flex flex-col">
               <DropdownMenuItem asChild>
-                <ModalLogin/>
+                <ModalLogin />
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link
-                  to="/Register"
-                  className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
-                >
-                  Registrarse
-                </Link>
+                <ModalRegister />
               </DropdownMenuItem>
             </DropdownMenuGroup>
           )}
           <DropdownMenuSeparator className="bg-gray-600 mx-3" />
 
-          <DropdownMenuItem className="px-4 py-2 hover:bg-gray-700 rounded-md cursor-pointer">
-            Soporte
+          <DropdownMenuItem className="px-4 py-2 rounded-md cursor-pointer justify-center">
+            Contactanos
           </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
