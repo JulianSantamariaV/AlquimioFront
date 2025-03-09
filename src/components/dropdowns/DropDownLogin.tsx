@@ -11,6 +11,7 @@ import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { decodedToken } from "../apiCalls/Auth";
 import ModalLogin from "../modals/Modal";
+import { ModalRegister } from "../modals/ModalRegister";
 
 
 export function DropDownLogin() {
@@ -40,15 +41,10 @@ export function DropDownLogin() {
           ) : (
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <ModalLogin/>
+                <ModalLogin />
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link
-                  to="/Register"
-                  className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
-                >
-                  Registrarse
-                </Link>
+                <ModalRegister />
               </DropdownMenuItem>
             </DropdownMenuGroup>
           )}
