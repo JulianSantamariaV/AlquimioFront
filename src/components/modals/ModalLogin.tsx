@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { login, token } from "../apiCalls/Auth";
+import { login } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 
 const ModalLogin: React.FC = () => {

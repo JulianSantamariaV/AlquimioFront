@@ -17,9 +17,9 @@ export function DropDownLogin() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="p-2 rounded-full hover:bg-gray-700 transition flex">
-          <Menu className="w-6 h-6 text-white" />
-          <User className="w-6 h-6 text-white" />
+        <button className="p-2 px-2 rounded-full hover:bg-gray-600 bg-gray-400 w-full transition flex">
+          <Menu className="w-6 h-6 ml-1 pr-1 text-white" />
+          <User className="w-6 h-6 ml-1 text-white" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">

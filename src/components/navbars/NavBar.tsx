@@ -60,28 +60,11 @@ const Navbar: React.FC = () => {
 
         </div>
 
-        {/* Menú de navegación */}
-
-        {/* <NavigationMenu className="z-0">
-          <NavigationMenuList className="flex space-x-6 text-sm font-medium">
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link
-                  to="/products/ProductCreate"
-                  className="hover:text-amber-400 transition hidden lg:block hover:underline"
-                >
-                  Vender
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu> */}
-
         
-        <div className="flex items-center space-x-3">
-          <div className="">
+        <div className="flex items-center w-[70px] space-x-3">
+   
             <DropDownLogin />
-          </div>
+         
         </div>
       </nav>
 
