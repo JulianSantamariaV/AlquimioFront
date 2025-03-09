@@ -39,15 +39,11 @@ export function DropDownLogin() {
             </DropdownMenuItem>
           ) : (
             <DropdownMenuGroup className="flex flex-col">
-              <DropdownMenuItem asChild className="w-full">
-                <div className="w-full">
-                  <ModalLogin />
-                </div>
+              <DropdownMenuItem asChild>
+                <ModalLogin />
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className="w-full">
-                <div className="w-full">
-                  <ModalRegister />
-                </div>
+              <DropdownMenuItem asChild>
+                <ModalRegister />
               </DropdownMenuItem>
             </DropdownMenuGroup>
           )}

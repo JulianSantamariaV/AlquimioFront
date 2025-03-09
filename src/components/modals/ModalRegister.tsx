@@ -8,13 +8,14 @@ import {
   DialogTitle,
   DialogHeader,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { userSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { register as registro, token } from "../apiCalls/Auth";
+import { register as registro } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
@@ -36,25 +37,15 @@ export const ModalRegister: React.FC = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Completa tus datos para registrarte</DialogTitle>
+          <DialogTitle>Bienvenido a Alquimio</DialogTitle>
+          <DialogDescription className="hover:text-black transition-colors">
+            Completa tus datos para registrarte
+          </DialogDescription>
         </DialogHeader>
         <form
           onSubmit={handleSubmit(async (data: z.infer<typeof userSchema>) => {
             try {
               await registro(data);
-              if (token) {
-                toast("Bienvenido a Alquimio", {
-                  type: "success",
-                  autoClose: 4000,
-                  position: "top-center",
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                });
-                console.log("Token:", token);
-              }
               setIsOpen(false);
               navigate("/");
             } catch (e) {
