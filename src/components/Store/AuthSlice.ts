@@ -15,6 +15,9 @@ const initialState: AuthState = {
 export const AuthSlice = createSlice({
   name: "auth",
   initialState,
+  selectors:{
+    getState: (state: AuthState) => state
+  },
   reducers: {
     putToken: (state, action) => {
       state.accessToken = action.payload;
@@ -31,5 +34,6 @@ export const AuthSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { putToken, deleteToken } = AuthSlice.actions;
+
 
 export default AuthSlice.reducer;
