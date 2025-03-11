@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { userSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { decodedToken, token, register as registro } from "../apiCalls/Auth";
+import { register as registro } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { putToken } from "../Store/AuthSlice";
@@ -31,8 +31,7 @@ export const ModalRegister: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -51,11 +50,11 @@ export const ModalRegister: React.FC = () => {
         <form
           onSubmit={handleSubmit(async (data: z.infer<typeof userSchema>) => {
             try {
-              await registro(data);
+              const response = await registro(data);
               setIsOpen(false);
               navigate("/");
-              dispatch(putToken(token));
-              console.log("token", decodedToken);
+              dispatch(putToken(response));
+              console.log("token", response);
             } catch (e) {
               toast("Error, intenta mas tarde", {
                 type: "error",

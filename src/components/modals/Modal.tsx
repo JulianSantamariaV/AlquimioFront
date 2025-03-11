@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { decodedToken, login, token } from "../apiCalls/Auth";
+import { login, } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { putToken } from "../Store/AuthSlice";
 import { useDispatch } from "react-redux";
@@ -46,11 +46,11 @@ const ModalLogin: React.FC = () => {
           onSubmit={handleSubmit(async (data) => {
             console.log("Datos enviados:", data);
             try {
-              await login(data.email, data.password);
+              const response = await login(data.email, data.password);
               setIsOpen(false);
               navigate("/");
-              dispatch(putToken(token));
-              console.log("token", decodedToken);
+              dispatch(putToken(response));
+              console.log("token", response);
             } catch (e) {
               toast("Credenciales incorrectas", {
                 type: "error",
