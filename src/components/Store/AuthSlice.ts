@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDecodedToken, TokenSchema } from "../apiCalls/Auth";
+import { TokenSchema } from "../apiCalls/Auth";
 import { jwtDecode } from "jwt-decode";
 
 export type AuthState = {
