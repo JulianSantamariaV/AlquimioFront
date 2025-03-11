@@ -15,7 +15,8 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { login, token } from "../apiCalls/Auth";
+import { login } from "../apiCalls/Auth";
+//deprecated
 
 interface CardLoginProps {
   onSuccess?: () => void;
@@ -49,9 +50,7 @@ const CardLogin: React.FC<CardLoginProps> = ({ onSuccess, className }) => {
             });
             console.error(e);
           });
-          if (token) {
-            navigate("/");
-          }
+      
           if (onSuccess) {
             onSuccess();
           }

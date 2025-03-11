@@ -14,8 +14,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { register, token } from "../apiCalls/Auth";
+import { register } from "../apiCalls/Auth";
 import { toast, ToastContainer } from "react-toastify";
+//deprecated
 
 const CardRegister: React.FC = () => {
   const navigate = useNavigate();
@@ -58,9 +59,6 @@ const CardRegister: React.FC = () => {
       });
       console.error(e);
     });
-    if (token) {
-      navigate("/");
-    }
   };
 
   return (

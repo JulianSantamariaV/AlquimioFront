@@ -16,7 +16,10 @@ import selectAuth from "../Store/AuthStore";
 
 export function DropDownLogin() {
   const select = useSelector(selectAuth.getState);
-  const { accessToken } = select.auth;
+  const { accessToken, decodedToken } = select.auth;
+  if(decodedToken){
+    console.log(decodedToken)
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
