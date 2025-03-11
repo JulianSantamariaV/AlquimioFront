@@ -15,9 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { userSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { register as registro } from "../apiCalls/Auth";
+import { decodedToken, token, register as registro } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { putToken } from "../Store/AuthSlice";
+import { useDispatch } from "react-redux";
 
 export const ModalRegister: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,11 +31,15 @@ export const ModalRegister: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">Registrate</Button>
+        <Button variant="ghost" className="cursor-pointer">
+          Registrate
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -48,6 +54,8 @@ export const ModalRegister: React.FC = () => {
               await registro(data);
               setIsOpen(false);
               navigate("/");
+              dispatch(putToken(token));
+              console.log("token", decodedToken);
             } catch (e) {
               toast("Error, intenta mas tarde", {
                 type: "error",

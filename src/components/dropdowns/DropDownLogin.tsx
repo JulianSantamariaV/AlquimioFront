@@ -9,11 +9,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
-import { decodedToken } from "../apiCalls/Auth";
 import ModalLogin from "../modals/Modal";
 import { ModalRegister } from "../modals/ModalRegister";
+import { useSelector } from "react-redux";
+import selectAuth from "../Store/AuthStore";
 
 export function DropDownLogin() {
+  const select = useSelector(selectAuth.getState);
+  const { accessToken } = select.auth;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,7 +31,7 @@ export function DropDownLogin() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-600" />
         <div className="bg-white">
-          {decodedToken ? (
+          {accessToken ? (
             <DropdownMenuItem asChild>
               <Link
                 to="/" // to="/Profile"

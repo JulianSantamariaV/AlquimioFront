@@ -1,24 +1,26 @@
 import { useState } from "react"; // ✅ Importar useState
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
-  DialogTitle, 
-  DialogHeader, 
-  DialogFooter 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogHeader,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schemas/userSchema";
 import { toast, ToastContainer } from "react-toastify";
-import { login } from "../apiCalls/Auth";
+import { decodedToken, login, token } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
+import { putToken } from "../Store/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const ModalLogin: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -27,11 +29,14 @@ const ModalLogin: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}> 
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="cursor-pointer">Login</Button>
+        <Button variant="ghost" className="cursor-pointer">
+          Login
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -44,6 +49,8 @@ const ModalLogin: React.FC = () => {
               await login(data.email, data.password);
               setIsOpen(false);
               navigate("/");
+              dispatch(putToken(token));
+              console.log("token", decodedToken);
             } catch (e) {
               toast("Credenciales incorrectas", {
                 type: "error",
@@ -56,7 +63,8 @@ const ModalLogin: React.FC = () => {
                 progress: undefined,
               });
               console.error(e);
-            }})}
+            }
+          })}
         >
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
