@@ -11,14 +11,13 @@ import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import ModalLogin from "../modals/Modal";
 import { ModalRegister } from "../modals/ModalRegister";
-import { useSelector } from "react-redux";
-import selectAuth from "../Store/AuthStore";
+import { useAppSelector } from "../Store/hooks";
 
 export function DropDownLogin() {
-  const select = useSelector(selectAuth.getState) // arreglar este warning
-  const { accessToken, decodedToken } = select.auth;
-  if(decodedToken){
-    console.log(decodedToken)
+  const select = useAppSelector((state) => state.auth);
+  const { accessToken, decodedToken } = select;
+  if (decodedToken) {
+    console.log(decodedToken);
   }
   return (
     <DropdownMenu>
