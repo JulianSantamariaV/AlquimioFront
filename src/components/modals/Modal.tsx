@@ -17,7 +17,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { login, } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { putToken } from "../Store/AuthSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../Store/hooks";
 
 const ModalLogin: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const ModalLogin: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

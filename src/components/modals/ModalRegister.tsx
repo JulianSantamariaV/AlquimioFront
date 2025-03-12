@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { putToken } from "../Store/AuthSlice";
 import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../Store/hooks";
 
 export const ModalRegister: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ export const ModalRegister: React.FC = () => {
     resolver: zodResolver(userSchema),
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
