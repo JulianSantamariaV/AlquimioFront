@@ -19,7 +19,6 @@ import { register as registro } from "../apiCalls/Auth";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { putToken } from "../Store/AuthSlice";
-import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../Store/hooks";
 
 export const ModalRegister: React.FC = () => {

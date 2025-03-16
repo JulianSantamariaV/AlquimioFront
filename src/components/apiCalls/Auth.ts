@@ -19,10 +19,14 @@ export type registerSchema = Omit<
 
 export const login = async (email: string, password: string) => {
   return await axios
-    .post(baseURL + "/login", {
-      email,
-      password,
-    })
+    .post(
+      baseURL + "/login",
+      {
+        email,
+        password,
+      },
+      { withCredentials: true }
+    )
     .then((response) => {
       console.log(response.data);
       return response.data as string;
@@ -34,8 +38,26 @@ export const login = async (email: string, password: string) => {
 };
 export const register = async (userData: registerSchema) => {
   return await axios
-    .post(baseURL + "/register", userData)
+    .post(baseURL + "/register", userData, { withCredentials: true })
     .then((response) => {
+      return response.data as string;
+    })
+    .catch((error) => {
+      console.log(error);
+      return null;
+    });
+};
+export const refreshToken = async () => {
+  return await axios
+    .post(
+      baseURL + "/refreshToken",
+      {},
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      console.log(response);
       return response.data as string;
     })
     .catch((error) => {
