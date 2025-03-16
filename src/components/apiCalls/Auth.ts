@@ -24,7 +24,8 @@ export const login = async (email: string, password: string) => {
       password,
     })
     .then((response) => {
-      return response.data.accessToken as string;
+      console.log(response.data);
+      return response.data as string;
     })
     .catch((error) => {
       console.log(error);
@@ -35,7 +36,7 @@ export const register = async (userData: registerSchema) => {
   return await axios
     .post(baseURL + "/register", userData)
     .then((response) => {
-      return response.data.accessToken as string;
+      return response.data as string;
     })
     .catch((error) => {
       console.log(error);
