@@ -27,5 +27,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "src/App.tsx", "services"]
+  "include": ["src", "src/App.tsx", "services", "src/components/modals/ModalLo1gin.tsx"]
 }

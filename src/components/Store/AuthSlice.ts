@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TokenSchema } from "../apiCalls/Auth";
 import { jwtDecode } from "jwt-decode";
 import { RootState } from "./AuthStore";
+import { TokenSchema } from "@/schemas/tokenSchema";
 
 export type AuthState = {
   accessToken: string | null;

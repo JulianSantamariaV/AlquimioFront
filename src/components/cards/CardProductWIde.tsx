@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { IProductDisplay } from "@/utils/interfaces/IProductDisplay";
+import IProduct from "@/utils/interfaces/IProducto";
 
 
-const ProductWideCard: React.FC<IProductDisplay> = ({ name, image, description, price }) => {
+const ProductWideCard: React.FC<IProduct> = ({ name, image, description, price }) => {
   const [loading, setLoading] = useState(true);
 
   return (

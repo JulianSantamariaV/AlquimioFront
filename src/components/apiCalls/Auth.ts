@@ -4,14 +4,7 @@ import { z } from "zod";
 
 const baseURL = "http://localhost:3000/auth";
 
-export type TokenSchema = {
-  userId: number;
-  email: string;
-  name: string;
-  username: string;
-  rol: number;
-  expiresAt: string;
-};
+
 export type registerSchema = Omit<
   z.infer<typeof userSchema>,
   "birthdate" | "photo" | "phonenumber" | "userid" | "rol"

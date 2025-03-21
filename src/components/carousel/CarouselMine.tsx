@@ -6,7 +6,7 @@ import { ICarouselProps } from "@/utils/interfaces/ICarouselProps";
 
 
 export const CarouselMine: React.FC<ICarouselProps> = ({ carouselImg }) => {
-  const { carouselProps } = useAutoplayCarousel();
+  const { carouselProps } = useAutoplayCarousel({delay: 5000});
 
   return (
     <div className="flex justify-center w-full">

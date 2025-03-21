@@ -18,7 +18,7 @@ export const CarouselServiceMine = () => {
       <Carousel {...carouselProps} className="w-full" aria-label="Servicios destacados">
         <CarouselContent>
           {services.map((service) => (
-            <CarouselItem key={service.serviceid} className="w-full">
+            <CarouselItem key={service.label} className="w-full">
               <div className="relative w-screen overflow-hidden aspect-[21/7]">
                 <img
                   src={service.image}

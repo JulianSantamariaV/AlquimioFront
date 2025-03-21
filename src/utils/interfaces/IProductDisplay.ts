@@ -3,5 +3,6 @@ export interface  IProductDisplay {
     description?: string;
     price: number;
     image: string[];
+    productid?: number;
   }
   

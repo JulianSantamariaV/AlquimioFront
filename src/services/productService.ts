@@ -25,7 +25,7 @@ export const createProduct = async (productData: z.infer<typeof productSchema>) 
 };
 
 
-export const updateProduct = async (productId: number, productData: z.infer<typeof productSchema>) => {
+export const updateProduct = async (productid: number, productData: z.infer<typeof productSchema>) => {
   const formData = new FormData();
 
   Object.entries(productData).forEach(([key, value]) => {
@@ -38,7 +38,7 @@ export const updateProduct = async (productId: number, productData: z.infer<type
     }
   });
 
-  const response = await axios.put(`${baseURL}/${productId}`, formData, {
+  const response = await axios.put(`${baseURL}/${productid}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 

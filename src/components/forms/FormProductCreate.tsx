@@ -18,7 +18,7 @@ const FormProductForm: React.FC = () => {
       price: 1,
       categoryid: 1,
       sellerid: 1,
-      image: [],
+      image: [],      
     },
   });
 
@@ -37,12 +37,14 @@ const FormProductForm: React.FC = () => {
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormProductFields form={form} />
-
-          {/* Imagen */}
-          <FileUploader onFileSelect={form.setValue.bind(null, "image")} />
-
-          {/* Botón */}
-          <Button className="text-gray-100 bg-amber-600 hover:bg-amber-700 transition" type="submit">
+         
+          <FileUploader onFileSelect={(newFiles) => {
+            form.setValue("image", [             
+              ...newFiles, 
+            ]);
+          }} />
+          
+          <Button className="text-gray-100 bg-amber-600 hover:bg-amber-700 transition my-5" type="submit">
             Crear Producto
           </Button>
         </form>

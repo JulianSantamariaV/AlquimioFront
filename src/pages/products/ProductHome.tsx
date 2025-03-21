@@ -1,4 +1,4 @@
-import ProductCard from "@/components/cards/CardProduct";
+import CardProduct from "@/components/cards/CardProduct";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/hooks/useProduct";
 import { PlusIcon } from "lucide-react";
@@ -14,11 +14,11 @@ const ProductHome = () => {
 
   return (
 
-    <div className="grid grid-cols-5 grid-rows-6 gap-4">
+    <div className="flex justify-center mx-15 gap-2">
       <div className="mx-auto my-5 flex flex-col items-center justify-center col-span-4 row-span-2">
 
-        <div className="flex justify-between items-center w-full">
-          <h1 className="text-2xl font-bold text-slate-800">Ofertas de hoy</h1>
+        <div className="flex justify-around items-center w-full">
+          <h2 className="text-2xl font-bold text-slate-800">Ofertas de hoy</h2>
           <Button asChild size={"lg"} variant={"important"}>
             <Link to="/products/ProductCreate">
             Vender
@@ -31,9 +31,10 @@ const ProductHome = () => {
         <hr></hr>
 
         <div className="grid grid-cols-1 md:grid-cols-6 gap-4 my-6">
-          {products.slice(0, 6).map((product) => (
-            <div key={product.name} className="w-full">
-              <ProductCard key={product.name} {...product} />
+          {products.map((product) => (
+            <div key={product.productid} className="w-full">
+              <CardProduct key={product.productid} {...product} 
+              />
             </div>
           ))}
         </div>

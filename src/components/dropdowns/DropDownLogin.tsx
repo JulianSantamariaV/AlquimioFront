@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, User } from "lucide-react";
 import { Link } from "react-router-dom";
-import ModalLogin from "../modals/Modal";
 import { ModalRegister } from "../modals/ModalRegister";
 import { useAppSelector } from "../Store/hooks";
+import ModalLogin from "../modals/ModalLogin";
 
 export function DropDownLogin() {
   const select = useAppSelector((state) => state.auth);
@@ -22,7 +22,7 @@ export function DropDownLogin() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="p-2 px-2 rounded-full hover:bg-gray-600 bg-gray-400 w-full transition flex">
+        <button className="p-2 px-2 rounded-full hover:bg-gray-600 bg-gray-400 w-full transition flex cursor-pointer">
           <Menu className="w-6 h-6 ml-1 pr-1 text-white" />
           <User className="w-6 h-6 ml-1 text-white" />
         </button>
@@ -36,8 +36,8 @@ export function DropDownLogin() {
           {accessToken ? (
             <DropdownMenuItem asChild>
               <Link
-                to="/" // to="/Profile"
-                className="block w-full px-4 py-2 hover:bg-gray-700 rounded-md"
+                to="/user/UserProfile"
+                className="block w-full px-4 py-2 hover:bg-gray-700 cursor-pointer rounded-md"
               >
                 Mi perfil
               </Link>

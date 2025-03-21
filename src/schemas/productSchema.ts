@@ -9,4 +9,5 @@ export const productSchema = z.object({
   categoryid: z.number().min(1),
   sellerid: z.number().min(1),
   image: z.array(z.instanceof(File)).optional(),
+  
 });

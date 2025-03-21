@@ -13,6 +13,7 @@ import { Routes, Route } from "react-router-dom";
 import About from "@/pages/About";
 import ProfileLayout from "@/layouts/ProfileLayout";
 import ProductHome from "@/pages/products/ProductHome";
+import ProductDetail from "@/pages/products/ProductDetail";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/products/ProductCreate" element={<ProductCreate />} />
         <Route path="/products/ProductHome" element={<ProductHome />} />
+        <Route path="/products/ProductDetail/:id" element={<ProductDetail />} />
         <Route path="/services/ServicesHome" element={<ServicesHome />} />
         <Route path="/services/ServicesCreate" element={<ServicesCreate />} />
       </Route>
