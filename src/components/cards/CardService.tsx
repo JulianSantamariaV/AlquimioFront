@@ -1,10 +1,10 @@
-import { IServiceDisplay } from "@/utils/interfaces/IService";
+import { IService } from "@/utils/interfaces/IService";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { useState, useEffect } from "react";
 import { Skeleton } from "../ui/skeleton";
 
 
-const CardService: React.FC<IServiceDisplay> = ({name, price, image = [], description}) => {
+const CardService: React.FC<IService> = ({name, price, image = [], description}) => {
   const [loading, setLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState<string>("/placeholder.jpg");
 

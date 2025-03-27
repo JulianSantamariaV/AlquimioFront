@@ -6,8 +6,13 @@ import { Button } from "@/components/ui/button";
 import { FormProductFields } from "./FormProductFields";
 import FileUploader from "../uploaders/FileUploader";
 import { createProduct } from "@/services/productService";
+import { useAppSelector } from "../Store/hooks";
 
 const FormProductForm: React.FC = () => {
+  
+  const select = useAppSelector((state) => state.auth);
+    const { decodedToken } = select;
+
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -17,7 +22,7 @@ const FormProductForm: React.FC = () => {
       condition: "1",
       price: 1,
       categoryid: 1,
-      sellerid: 1,
+      sellerid: decodedToken?.userId,
       image: [],      
     },
   });

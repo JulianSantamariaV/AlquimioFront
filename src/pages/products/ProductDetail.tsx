@@ -4,7 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/hooks/useProduct";
-import { Calendar } from "lucide-react";
+import { ModalCalendar } from "@/components/modals/ModalCalendar";
+import { ShoppingBag } from "lucide-react";
+import { Icon } from "@radix-ui/react-select";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -54,10 +56,10 @@ export default function ProductDetail() {
         <div className="flex flex-col">
           <h2 className="text-3xl font-bold">{product.name}</h2>
           <p className="text-gray-600 mt-2">{product.condition}</p>
-          
+
           <p className="text-xl font-semibold text-primary mt-2">${product.price}</p>
 
-          
+
 
           <div className="mt-auto mb-2 flex items-center">
             <span className="text-sm text-gray-600 mr-2">Cantidad de días</span>
@@ -74,20 +76,18 @@ export default function ProductDetail() {
             >
               +
             </button>
-            <Button
-              variant="ghost"
-              className="w-8 h-8 ml-2 border rounded-r-md cursor-pointer"
-              aria-label="Open calendar"
-              onClick={() => console.log("Open calendar")}
-            >
-              <Calendar />
-            </Button>
+
+            <ModalCalendar />
+
           </div>
 
-          <div className="flex gap-4 mt-auto">
-            <Button variant={"important"} className="w-4/5 text-2xl p-8 ">
+          <div className="relative w-4/5 mt-auto">
+            <Button variant={"important"} className="w-full text-2xl p-8 ">
               Rentar
             </Button>
+
+            <ShoppingBag onClick={console.log} className="absolute top-0 right-0 w-8 h-8 transform -translate-y-8 text-red-500 hover:text-red-600 cursor-pointer hover:scale-110 transition " />
+
           </div>
         </div>
       </div>
@@ -97,18 +97,16 @@ export default function ProductDetail() {
           <Button
             onClick={() => handdleParagraph(0)}
             variant={"ghost"}
-            className={`py-2 px-4 text-gray-600 ${
-              paragraph === 0 ? "text-inherit border-b-2 border-blue-500" : ""
-            } font-medium`}
+            className={`py-2 px-4 text-gray-600 ${paragraph === 0 ? "text-inherit border-b-2 border-blue-500" : ""
+              } font-medium`}
           >
             Descripción
           </Button>
           <Button
             onClick={() => handdleParagraph(1)}
             variant={"ghost"}
-            className={`py-2 px-4 text-gray-600 ${
-              paragraph === 1 ? "text-inherit border-b-2 border-blue-500" : ""
-            } font-medium`}
+            className={`py-2 px-4 text-gray-600 ${paragraph === 1 ? "text-inherit border-b-2 border-blue-500" : ""
+              } font-medium`}
           >
             Reseñas
           </Button>

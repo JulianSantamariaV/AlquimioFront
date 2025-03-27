@@ -22,13 +22,13 @@ export function DropDownLogin() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="p-2 px-2 rounded-full hover:bg-gray-600 bg-gray-400 w-full transition flex cursor-pointer">
-          <Menu className="w-6 h-6 ml-1 pr-1 text-white" />
-          <User className="w-6 h-6 ml-1 text-white" />
+        <button className="p-2 px-2 rounded-full hover:bg-gray-600/80 bg-gray-600 w-full transition flex cursor-pointer outline-none">
+          <Menu className="w-6 h-6 ml-1 pr-1 text-rose-50" />
+          <User className="w-6 h-6 ml-1 text-rose-50" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 bg-gray-700 border-none shadow-lg rounded-lg">
-        <DropdownMenuLabel className="bg-gray-700 text-white font-semibold text-center">
+        <DropdownMenuLabel className="bg-gray-700 text-rose-50 font-semibold text-center">
           Alquimio
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-gray-600" />

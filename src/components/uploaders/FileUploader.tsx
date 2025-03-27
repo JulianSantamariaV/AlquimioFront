@@ -56,7 +56,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onFileSelect }) => {
             <div key={index} className="relative w-32 h-32">
               
               <button
-                className="absolute top-1 right-0 translate-x-2 -translate-y-2 z-10 p-1 bg-red-500/50 text-white rounded-full hover:bg-red-600 transition cursor-pointer"
+                className="absolute top-1 right-0 translate-x-2 -translate-y-2 z-10 p-1 bg-red-500/50 text-rose-50 rounded-full hover:bg-red-600 transition cursor-pointer"
                 onClick={() => removeImage(index)}
               >
                 <Trash className="w-4 h-4" />

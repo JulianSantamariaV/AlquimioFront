@@ -6,9 +6,9 @@ import FooterMain from "@/components/footers/FooterMain";
 export default function ProfileLayout() {
   return (
     <>
-    <SidebarProvider>      
+    <SidebarProvider defaultOpen={false}>      
       <SideBar />      
-      <main>
+      <main className="flex flex-col min-h-screen bg-gradient-to-b from-zinc-50 to-slate-50">
         <SidebarTrigger />
         <Outlet />
       </main>      

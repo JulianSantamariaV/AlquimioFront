@@ -40,7 +40,7 @@ const CardProduct: React.FC<{ productid: string }> = ({ productid }) => {
             />
           </div>
 
-          <CardContent className="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
+          <CardContent className="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent text-rose-50">
             <h3 className="text-lg font-semibold">{product.name}</h3>
             <p className="text-md font-medium text-emerald-400">${product.price}</p>
           </CardContent>

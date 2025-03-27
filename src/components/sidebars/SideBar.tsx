@@ -10,39 +10,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Crear Servicio",
-    url: "/services/ServicesCreate",
-    icon: PlusCircle,
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
-]
+import { items } from "@/data/userProfileData"
 
 export function SideBar() {
   return (
-    <Sidebar>
+    <Sidebar variant="floating" collapsible="icon" >
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>ALQUIMIO</SidebarGroupLabel>

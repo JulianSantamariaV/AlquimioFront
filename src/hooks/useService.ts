@@ -1,4 +1,4 @@
-import { IServiceDisplay } from "@/utils/interfaces/IService";
+import { IService } from "@/utils/interfaces/IService";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -6,13 +6,13 @@ const API_URL = "http://localhost:3000/services";
 
 export const useService = () => {
     
-  const [services, setServices] = useState<IServiceDisplay[]>([]);
+  const [services, setServices] = useState<IService[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     axios
-      .get<IServiceDisplay[]>(API_URL)
+      .get<IService[]>(API_URL)
       .then((response) => {
         console.log("API Response:", response.data);
         setServices(

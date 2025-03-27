@@ -24,7 +24,7 @@ const UserProfile: React.FC = () => {
         {/* Sección de edición */}
         <div className="col-span-5 row-span-2 row-start-4">
           <div className="flex flex-col">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between">
               <h3 className="text-xl font-bold">Nombre</h3>
               <p className="text-sm cursor-pointer text-blue-500 hover:underline">
                 Editar

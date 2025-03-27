@@ -1,4 +1,4 @@
-export interface  IServiceDisplay {
+export interface  IService {
     serviceid: number;
     name: string;
     description?: string;

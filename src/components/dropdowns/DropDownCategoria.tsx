@@ -14,14 +14,14 @@ import { Menu } from "lucide-react";
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="flex items-center gap-2 text-white transition ease-in-out cursor-pointer 
+          <Button variant="ghost" className="flex items-center gap-2 text-rose-50 transition ease-in-out cursor-pointer 
                  hover:bg-gradient-to-b from-white/20 to-gray">
              <Menu className="w-5 h-5" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-72 bg-gray-700 border-none shadow-lg rounded-t-none rounded-b-lg">
             <div>
-          <DropdownMenuLabel className="font-semibold text-white">Categorías</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-semibold text-rose-50">Categorías</DropdownMenuLabel>
           </div>
           <DropdownMenuSeparator className="bg-gray-600" />
           <div className="bg-white">

@@ -26,7 +26,7 @@ export const CarouselServiceMine = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <h3 className="text-2xl md:text-4xl font-bold text-white text-center px-4">
+                  <h3 className="text-2xl md:text-4xl font-bold text-rose-50 text-center px-4">
                     {service.label}
                   </h3>
                 </div>
