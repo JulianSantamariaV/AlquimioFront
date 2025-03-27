@@ -1,5 +1,4 @@
 import CardProduct from "@/components/cards/CardProduct";
-import ProductWideCard from "@/components/cards/CardProductWIde";
 import { CarouselMine } from "@/components/carousel/CarouselMine";
 import { ServicesIcons } from "@/components/carousel/CarouselServicesIcons";
 import { useProducts } from "@/hooks/useProduct";

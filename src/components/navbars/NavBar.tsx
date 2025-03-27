@@ -1,29 +1,33 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { InputWithButton } from "../inputs/InputWithButton";
 import { DropDownLogin } from "../dropdowns/DropDownLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, ShoppingBasket } from "lucide-react";
-
+import { ShoppingCart } from "../cart/ShoppingCart";
+import { useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
-  // const [isVisible, setIsVisible] = useState(true);
-  // const lastScrollY = useRef(window.scrollY);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [shoppingProductCount, setShoppingProductCount] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const location = useLocation();
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
+  useEffect(() => {
+    const updateShoppingProductCount = () => {
+      const products = JSON.parse(localStorage.getItem("products") || "[]");
+      setShoppingProductCount(products.length);
+    };
+    updateShoppingProductCount();
 
-  //     if (Math.abs(currentScrollY - lastScrollY.current) < 10) return;
+    // Escuchar cambios en el localStorage
+    window.addEventListener("storage", updateShoppingProductCount);
+    return () => window.removeEventListener("storage", updateShoppingProductCount);
+  }, []);
 
-  //     setIsVisible(currentScrollY < lastScrollY.current);
-  //     lastScrollY.current = currentScrollY;
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  useEffect(() => {
+    // Cerrar el carrito cuando cambie la ruta
+    setIsCartOpen(false);
+  }, [location]);
 
   return (
     <header className="w-full sticky top-0 left-0 z-50">
@@ -80,9 +84,18 @@ const Navbar: React.FC = () => {
         <div className="flex justify-center w-full">
           <InputWithButton />
         </div>
-        <ShoppingBasket className="w-8 h-8 text-rose-50 hover:text-amber-400 transition cursor-pointer text-2xl font-bold" />
+        <div className="relative">
+          {shoppingProductCount > 0 && (
+            <span className="absolute -top-3 right-0 text-amber-400">{shoppingProductCount}</span>
+          )}          
+          <ShoppingBasket 
+            className="shopping-cart-icon w-8 h-8 hover:text-amber-400 transition cursor-pointer text-2xl font-bold" 
+            onClick={() => setIsCartOpen(true)}
+          />
+        </div>
       </nav>
 
+      <ShoppingCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

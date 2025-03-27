@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import IProduct from "@/utils/interfaces/IProducto";
+import { IProduct } from "@/utils/interfaces/IProducto";
 
 const API_URL = "http://localhost:3000/products";
 

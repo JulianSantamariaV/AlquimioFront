@@ -1,16 +1,18 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useProducts } from "@/hooks/useProduct";
 import { ModalCalendar } from "@/components/modals/ModalCalendar";
-import { ShoppingBag } from "lucide-react";
-import { Icon } from "@radix-ui/react-select";
+import { ArrowLeft, ShoppingBag } from "lucide-react";
+import { useShoppingCart } from "@/hooks/useShoppingCart";
+import { toast } from "sonner";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const { products, loading, error } = useProducts(id);
+  const { addToCart } = useShoppingCart();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [paragraph, setParagraph] = useState(0);
@@ -33,6 +35,9 @@ export default function ProductDetail() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      <Link to="/products/ProductHome">
+        <ArrowLeft />
+      </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <img
@@ -86,7 +91,22 @@ export default function ProductDetail() {
               Rentar
             </Button>
 
-            <ShoppingBag onClick={console.log} className="absolute top-0 right-0 w-8 h-8 transform -translate-y-8 text-red-500 hover:text-red-600 cursor-pointer hover:scale-110 transition " />
+            <ShoppingBag
+              onClick={() => {
+                addToCart(product, quantity);
+                toast("Producto agregado al carrito", {
+                  description: `${quantity} unidad(es) de ${product.name}`,
+                  action: {
+                    label: "Ver carrito",
+                    onClick: () => {
+                      const cartIcon = document.querySelector('.shopping-cart-icon') as HTMLElement;
+                      cartIcon?.click();
+                    }
+                  }
+                });
+              }}
+              className="absolute top-0 right-0 w-8 h-8 transform -translate-y-8 text-red-500 hover:text-red-600 cursor-pointer hover:scale-110 transition"
+            />
 
           </div>
         </div>

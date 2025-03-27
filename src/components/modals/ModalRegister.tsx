@@ -43,7 +43,7 @@ export const ModalRegister: React.FC = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Bienvenido a Alquimio</DialogTitle>
-          <DialogDescription className="hover:text-black transition-colors">
+          <DialogDescription className="hover:text-zinc-900 transition-colors">
             Completa tus datos para registrarte
           </DialogDescription>
         </DialogHeader>

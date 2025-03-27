@@ -15,10 +15,8 @@ import ModalLogin from "../modals/ModalLogin";
 
 export function DropDownLogin() {
   const select = useAppSelector((state) => state.auth);
-  const { accessToken, decodedToken } = select;
-  if (decodedToken) {
-    console.log(decodedToken);
-  }
+  const { accessToken } = select;  
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

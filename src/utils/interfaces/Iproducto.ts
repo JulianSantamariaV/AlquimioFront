@@ -1,4 +1,4 @@
-interface IProduct {
+export interface IProduct {
   productid: string; 
   name: string;
   description?: string;
@@ -12,8 +12,7 @@ interface IProduct {
   productreview: string;
 }
 
-export default IProduct
 
-export interface IProductWithId extends IProduct{
-  productid: string; 
+export interface ICartItem extends Pick<IProduct, 'productid' | 'name' | 'price' | 'image'> {
+  quantity: number;
 }
