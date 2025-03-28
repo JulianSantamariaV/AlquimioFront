@@ -11,7 +11,7 @@ import { useAppSelector } from "../Store/hooks";
 const FormProductForm: React.FC = () => {
   
   const select = useAppSelector((state) => state.auth);
-    const { decodedToken } = select;
+    const { decodedToken, accessToken } = select;
 
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
@@ -30,7 +30,7 @@ const FormProductForm: React.FC = () => {
   const onSubmit = async (data: z.infer<typeof productSchema>) => {
     console.log("Datos enviados:", data);
     try {
-      const newProduct = await createProduct(data);
+      const newProduct = await createProduct(data, accessToken);
       console.log("Producto creado:", newProduct);
     } catch (error) {
       console.error("Error al crear producto:", error);

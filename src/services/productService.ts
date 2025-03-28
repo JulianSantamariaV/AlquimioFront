@@ -4,7 +4,10 @@ import { productSchema } from "@/schemas/productSchema";
 
 const baseURL = "http://localhost:3000/products";
 
-export const createProduct = async (productData: z.infer<typeof productSchema>) => {
+export const createProduct = async (
+  productData: z.infer<typeof productSchema>,
+  accessToken: string | null
+) => {
   const formData = new FormData();
 
   Object.entries(productData).forEach(([key, value]) => {
@@ -16,16 +19,22 @@ export const createProduct = async (productData: z.infer<typeof productSchema>) 
       }
     }
   });
+  console.log('accessToken', accessToken)
 
   const response = await axios.post(baseURL, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: accessToken,
+    },
   });
 
   return response.data;
 };
 
-
-export const updateProduct = async (productid: number, productData: z.infer<typeof productSchema>) => {
+export const updateProduct = async (
+  productid: number,
+  productData: z.infer<typeof productSchema>
+) => {
   const formData = new FormData();
 
   Object.entries(productData).forEach(([key, value]) => {
@@ -44,5 +53,3 @@ export const updateProduct = async (productid: number, productData: z.infer<type
 
   return response.data;
 };
-
-
